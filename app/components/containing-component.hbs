@@ -2,10 +2,67 @@
 
 Input value: {{this.inputValue}}
 
-<h3>Plain input tag</h3>
-
-<input type="text" value={{this.inputValue}} {{on "keyup" this.setInputValue}} />
-
 <h3>Input helper/component</h3>
 
+Uses two-way binding; we want to get away from that implementation.
+
+<pre><code class="language-handlebars">&lt;Input @value=&#123;&#123;this.inputValue}} /&gt;</code></pre>
+
 <Input @value={{this.inputValue}} />
+
+<h3>Custom setter action</h3>
+
+<pre><code class="language-handlebars">&lt;input
+  type="text"
+  value=&#123;&#123;this.inputValue}}
+  &#123;&#123;on "keyup" this.setInputValue}}
+/&gt;</code></pre>
+
+<input
+  type="text"
+  value={{this.inputValue}}
+  {{on "keyup" this.setInputValue}}
+/>
+
+<h3>Mut helper</h3>
+
+Complex; probably not worth it
+
+<h3>Set helper addon</h3>
+
+<p><a href="https://github.com/pzuraq/ember-set-helper">https://github.com/pzuraq/ember-set-helper</a></p>
+
+<p>(currently gives an error)</p>
+
+<pre><code class="language-handlebars">&lt;button
+  value="Hola!"
+  &#123;&#123;on "click" (set this.inputValue (get _ "target.value"))}}
+&gt;
+  Español
+&lt;/button&gt;</code></pre>
+
+<h3>Smart event handler helper</h3>
+
+<pre><code class="language-handlebars">&lt;input
+  type="text"
+  value=&#123;&#123;this.inputValue}}
+  &#123;&#123;on "keyup" (smart-set this "inputValue")}}
+/&gt;</code></pre>
+
+<input
+  type="text"
+  value={{this.inputValue}}
+  {{on "keyup" (smart-set this "inputValue")}}
+/>
+
+<h4>Ref helper</h4>
+
+<pre><code class="language-handlebars">&lt;RefInput
+  type="text"
+  @ref=&#123;&#123;ref this "inputValue"}}
+/&gt;</code></pre>
+
+<RefInput
+  type="text"
+  @ref={{ref this "inputValue"}}
+/>
