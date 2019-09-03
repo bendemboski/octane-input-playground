@@ -43,6 +43,8 @@ Complex; probably not worth it
 
 <h3>Smart event handler helper</h3>
 
+The idea is that this helper creates a function to handle browser events, intelligently inspecting it to see what kind of event it is, and therefore how to properly set the value of the field. For now just hard-coded to pull from <code>event.target.value</code>.
+
 <pre><code class="language-handlebars">&lt;input
   type="text"
   value=&#123;&#123;this.inputValue}}
@@ -56,6 +58,8 @@ Complex; probably not worth it
 />
 
 <h4>Ref helper</h4>
+
+Creates an object that wraps a value, like a reference, so that it can be gotten and setted. <code>RefInput</code> is a sample input component that is made to handle refs. Final/backwards-compatible API could be considered separately.
 
 <pre><code class="language-handlebars">&lt;RefInput
   type="text"
