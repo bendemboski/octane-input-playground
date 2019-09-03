@@ -5,3 +5,7 @@ Input value: {{this.inputValue}}
 <h3>Plain input tag</h3>
 
 <input type="text" value={{this.inputValue}} {{on "keyup" this.setInputValue}} />
+
+<h3>Input helper/component</h3>
+
+<Input @value={{this.inputValue}} />
