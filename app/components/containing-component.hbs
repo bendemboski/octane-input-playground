@@ -57,9 +57,11 @@ The idea is that this helper creates a function to handle browser events, intell
   {{on "keyup" (smart-set this "inputValue")}}
 />
 
-<h4>Ref helper</h4>
+<h3>Ref helper</h3>
 
 Creates an object that wraps a value, like a reference, so that it can be gotten and setted. <code>RefInput</code> is a sample input component that is made to handle refs. Final/backwards-compatible API could be considered separately.
+
+<h4>Basic Case</h4>
 
 <pre><code class="language-handlebars">&lt;RefInput
   type="text"
@@ -69,4 +71,16 @@ Creates an object that wraps a value, like a reference, so that it can be gotten
 <RefInput
   type="text"
   @ref={{ref this "inputValue"}}
+/>
+
+<h4>Custom Setter</h4>
+
+<pre><code class="language-handlebars">&lt;RefInput
+  type="text"
+  @ref=&#123;&#123;ref this "inputValue" update=this.trimAndSetInputValue}}
+/&gt;</code></pre>
+
+<RefInput
+  type="text"
+  @ref={{ref this "inputValue" update=this.trimAndSetInputValue}}
 />

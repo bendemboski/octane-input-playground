@@ -9,4 +9,9 @@ export default class ContainingComponent extends Component {
   setInputValue(event) {
     this.inputValue = event.target.value;
   }
+
+  @action
+  trimAndSetInputValue(value) {
+    this.inputValue = value.trim();
+  }
 }
