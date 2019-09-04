@@ -4,6 +4,7 @@ import { tracked } from '@glimmer/tracking';
 
 export default class ContainingComponent extends Component {
   @tracked inputValue = 'asdf';
+  @tracked onSetCalls = 0;
 
   initialValues = {
     inputValue: 'asdf',
@@ -17,6 +18,10 @@ export default class ContainingComponent extends Component {
   @action
   trimAndSetInputValue(value) {
     this.inputValue = value.trim();
+  }
+
+  @action onSet() {
+    this.onSetCalls += 1;
   }
 
   @action

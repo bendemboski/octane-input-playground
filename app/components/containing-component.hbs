@@ -85,6 +85,62 @@ Creates an object that wraps a value, like a reference, so that it can be gotten
   @ref={{ref this "inputValue" update=this.trimAndSetInputValue}}
 />
 
+<h3>Ref helper (alternate custom setter interface)</h3>
+
+This ref helper's custom setter interface isolates the setter from the context and instead provides it a method for setting the reference. The main benefit here is enabling custom setter helpers that aren't aware of the context.
+
+<h4>Custom setter using helper</h4>
+
+<pre><code class="language-javascript">export default helper(function trimAndSet() {
+  return function({ value, set }) {
+    set(value.trim());
+  };
+});</code></pre>
+
+<pre><code class="language-handlebars">&lt;RefInput
+  type="text"
+  @ref=&#123;&#123;ref2 this "inputValue" update=(trim-and-set)}}
+/&gt;</code></pre>
+
+<RefInput
+  type="text"
+  @ref={{ref2 this "inputValue" update=(trim-and-set)}}
+/>
+
+<h4>Custom setter using complex helper</h4>
+
+This is a very silly helper just meant to illustrate the flexibility of this update function interface.
+
+<pre><code class="language-javascript">export default helper(function maybeSetAndNotify([ onSet ]) {
+  return function({ oldValue, value, set }) {
+    if (value.trim() === oldValue) {
+      return;
+    }
+  
+    let toSet;
+    if (!value.includes('_')) {
+      toSet = value;
+    } else {
+      toSet = 'invalid input';
+    }
+  
+    set(toSet);
+    onSet(toSet);
+  };
+});</code></pre>
+
+<pre><code class="language-handlebars">&lt;RefInput
+  type="text"
+  @ref=&#123;&#123;ref2 this "inputValue" update=(maybe-set-and-notify this.onSet)}}
+/&gt;</code></pre>
+
+<RefInput
+  type="text"
+  @ref={{ref2 this "inputValue" update=(maybe-set-and-notify this.onSet)}}
+/>
+
+<p>this.onSet calls: {{this.onSetCalls}}</p>
+
 <h3>Stateful Form Component</h3>
 
 Makes a copy of the passed-in data, mutates it in place, and doesn't deliver it to the rest of the app until the form is submitted.
