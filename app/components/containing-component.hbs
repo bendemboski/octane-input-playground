@@ -87,6 +87,23 @@ Creates an object that wraps a value, like a reference, so that it can be gotten
 
 <h3>Stateful Form Component</h3>
 
+Makes a copy of the passed-in data, mutates it in place, and doesn't deliver it to the rest of the app until the form is submitted.
+
+<h4>Using any old approach for the form element</h4>
+
+The yielded object has a `values` property with the current state values of the form, that can be manipulated any way you like. For example, here we use the `RefInput` component from earlier.
+
+<pre><code class="language-handlebars">&lt;Form
+  @initialValues=&#123;&#123;this.initialValues}}
+  @onSubmit=&#123;&#123;this.persistInputValue}} as |F|
+&gt;
+  &lt;RefInput
+    type="text"
+    @ref=&#123;&#123;ref F.values "inputValue"}}
+  /&gt;
+  &lt;button&gt;Save Changes&lt;/button&gt;
+&lt;/Form&gt;</code></pre>
+
 <Form
   @initialValues={{this.initialValues}}
   @onSubmit={{this.persistInputValue}} as |F|
@@ -96,6 +113,34 @@ Creates an object that wraps a value, like a reference, so that it can be gotten
   <RefInput
     type="text"
     @ref={{ref F.values "inputValue"}}
+  />
+  <button>Save Changes</button>
+</Form>
+
+<h4>Contextual form components</h4>
+
+We can also provide contextual form components that allow you to just specify the name of the field, and they handle getting and setting the value. Splattributes make these more reusable than they would otherwise be. And if they aren't flexible enough, you can always manipulate the `values` directly.
+
+<pre><code class="language-handlebars">&lt;Form
+  @initialValues=&#123;&#123;this.initialValues}}
+  @onSubmit=&#123;&#123;this.persistInputValue}} as |F|
+&gt;
+  &lt;F.Input
+    type="text"
+    @field="inputValue"
+  /&gt;
+  &lt;button&gt;Save Changes&lt;/button&gt;
+&lt;/Form&gt;</code></pre>
+
+<Form
+  @initialValues={{this.initialValues}}
+  @onSubmit={{this.persistInputValue}} as |F|
+>
+  <p>Outer value: {{this.inputValue}}</p>
+  <p>Form state value: {{F.values.inputValue}}</p>
+  <F.Input
+    type="text"
+    @field="inputValue"
   />
   <button>Save Changes</button>
 </Form>
