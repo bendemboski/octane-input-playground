@@ -2,4 +2,13 @@
 
 Repo (<code>master</code> branch auto-deploys): <a href="https://github.com/CodingItWrong/octane-input-playground">https://github.com/CodingItWrong/octane-input-playground</a>
 
+<h2>Goals</h2>
+
+<ul>
+<li>Remove two-way binding from the framework</li>
+<li>Provide a way to handle the simple case of form elements (where they read from and update the same property on the context) without needing to specify two different properties.</li>
+<li>Provide a way to handle more complex form element cases, such as typeaheads, where behavior needs to be run upon changing the value.</li>
+<li>Provide a way for forms to have their own state that isn't sent to the rest of the application until the form is submitted.</li>
+</ul>
+
 <ContainingComponent />
