@@ -84,3 +84,18 @@ Creates an object that wraps a value, like a reference, so that it can be gotten
   type="text"
   @ref={{ref this "inputValue" update=this.trimAndSetInputValue}}
 />
+
+<h3>Stateful Form Component</h3>
+
+<Form
+  @initialValues={{this.initialValues}}
+  @onSubmit={{this.persistInputValue}} as |F|
+>
+  <p>Outer value: {{this.inputValue}}</p>
+  <p>Form state value: {{F.values.inputValue}}</p>
+  <RefInput
+    type="text"
+    @ref={{ref F.values "inputValue"}}
+  />
+  <button>Save Changes</button>
+</Form>

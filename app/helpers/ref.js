@@ -1,4 +1,5 @@
 import { helper } from '@ember/component/helper';
+import { set } from '@ember/object';
 
 export default helper(function ref([context, propertyName], {update}) {
   const ref = {
@@ -9,7 +10,7 @@ export default helper(function ref([context, propertyName], {update}) {
       if (update) {
         update(value);
       } else {
-        context[propertyName] = value;
+        set(context, propertyName, value);
       }
     }
   };

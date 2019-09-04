@@ -1,0 +1,5 @@
+<form {{on "submit" this.handleSubmit}}>
+  {{yield (hash
+    values=this.values
+  )}}
+</form>
